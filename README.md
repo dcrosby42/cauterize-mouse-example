@@ -89,3 +89,71 @@ Create a file named "Cauterize":
 
 	cauterize generate c c_mouse_comm
 	
+This will create the subdir `c_mouse_com/` containing:
+
+* `mouse_comm.h` - you include this to build and interpret data structures from your schema
+* `mouse_comm.c` - the implementation of the 'mouse_comm' schema
+* (Cauterize .h and .c deps used by mouse_comm schema code.)
+
+## The "writer"
+
+### Write a C program to create and serialize data
+
+Include the header:
+
+	#include <mouse_comm.h>
+	
+You can know in advance how big a buffer you'll need to serialize mouse_message objects into:
+
+	uint8_t message_buffer[MAX_ENCODED_LENGTH_mouse_message];
+	
+You can build instances of your objects using struct literals in your code:
+
+    struct mouse_message msg_obj = {
+      .tag = GROUP_MOUSE_MESSAGE_TYPE_MOUSE_UPDATE,
+      .data = {
+        .mouse_update = {
+          .cursor_type = IBEAM,
+          .resolution = {
+            .width = 1024,
+            .height = 768,
+          },
+          .position = {
+            .x = 500,
+            .y = 500,
+          },
+        },
+      },
+    };
+
+You can pack that whole object into a buffer with a single call:
+
+    struct Cauterize c;
+    CAUTERIZE_STATUS_T err = CA_OK;
+    err = CauterizeInitAppend(&c, message_buffer, sizeof(message_buffer));
+    err = Pack_mouse_message(&c, &msg_obj);
+
+
+### Sample program: `write_packet.c`
+
+You can view, compile and run the `write_packet.c` program in this repository.  (When tinkering, run the helper script `./run_write_packet.h`)
+
+Compile:
+
+	gcc -Ic_mouse_comm c_mouse_comm/mouse_comm.c c_mouse_comm/cauterize.c write_packet.c -o write_packet
+	
+Run:
+
+	./write_packet
+	
+See output:
+
+	hexdump mouse_message.dat
+	
+You should see binary output indicating you serialized `00 00 04 00 04 00 03 F4 01 F4 01`.
+
+## The "reader"
+
+### Write a Ruby program to read the cauterized data
+
+TODO

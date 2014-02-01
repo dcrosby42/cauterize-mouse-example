@@ -2,11 +2,11 @@
 
 #include <mouse_comm.h>
 
-uint8_t packet_buffer[MAX_ENCODED_LENGTH_mouse_message];
 
 int main(int argc, char * argv[]) {
 
   struct Cauterize c;
+  uint8_t packet_buffer[MAX_ENCODED_LENGTH_mouse_message];
 
   struct mouse_message mouse_message = {
     .tag = GROUP_MOUSE_MESSAGE_TYPE_MOUSE_UPDATE,
