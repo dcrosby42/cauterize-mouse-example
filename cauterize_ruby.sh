@@ -1,7 +1,7 @@
 #!/bin/sh
 
-LANG=c
-DIR=c_mouse_comm
+LANG=ruby
+DIR=ruby_mouse_comm
 
 runtraced() { echo "$@"; "$@"; }
 
