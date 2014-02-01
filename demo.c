@@ -39,18 +39,5 @@ int main(int argc, char * argv[]) {
   }
   printf("\n");
 
-  /* const char * fname = "./sample.dat"; */
-  /* FILE* outfile = fopen(fname,"w"); */
-  /* if (outfile != NULL) { */
-  /*   fwrite(response_buffer, c.used, 1, outfile); */
-  /*   if (!fclose(outfile)) { */
-  /*     printf("Wtf fail fclose(%s)\n", fname); */
-  /*   } */
-
-  /*   printf("Wrote '%s'.\n",fname); */
-  /* } else {  */
-  /*   printf("Fail to open outfile '%s'.\n",fname); */
-  /* } */
-
   return 0;
 }
