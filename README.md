@@ -1,3 +1,4 @@
+*(Tutorial and sample code for first-time [Cauterize](https://github.com/sw17ch/cauterize) users.)*
 ## Problem
 
 Define a message protocol for synchronizing mouse state over a network by communicating:
@@ -25,11 +26,13 @@ There's really only 5 pieces of info here, and we could easily represent them as
 
 **Gotcha:** we want to encode and send these messages using C, but receive and decode them using Ruby.
 
-## Cauterize
+## Cool tool: Cauterize
 
-### Install the Cauterize Rubygem
+[Cauterize on GitHub](https://github.com/sw17ch/cauterize) - https://github.com/sw17ch/cauterize.git
 
-	gem install cauterize
+### Install the Cauterize Rubygem (coming soon)
+
+	gem install cauterize 
 	
 or
 
@@ -192,3 +195,8 @@ See output:
 	Unpacked message of class: MouseMessage
 	mouse_message.to_ruby.inspect: {:tag=>:MOUSE_UPDATE, :data=>{:cursor_type=>:IBEAM, :resolution=>{:width=>1024, :height=>768}, :position=>{:x=>500, :y=>500}}}
 
+## Everything
+
+To run the whole sequence automatically:
+
+	sh everything.sh
