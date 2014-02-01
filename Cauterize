@@ -32,7 +32,7 @@ variable_array(:error_information) do |c|
   c.array_size 255
 end
 
-group(:mouse_packet) do |c|
+group(:mouse_message) do |c|
   c.field :mouse_update, :mouse_sample
   c.field :error, :error_information
 end
