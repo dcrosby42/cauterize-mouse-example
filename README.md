@@ -85,4 +85,7 @@ Create a file named "Cauterize":
       c.array_size 255
     end
 
-### 
+### Generate the C library code for this schema
+
+	cauterize generate c c_mouse_comm
+	
