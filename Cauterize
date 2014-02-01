@@ -1,0 +1,42 @@
+set_name("mouse_comm")
+set_version("0.0.1")
+
+enumeration(:cursor_type) do |c|
+  c.value :normal
+  c.value :cross
+  c.value :hand
+  c.value :resize
+  c.value :ibeam, 1024
+end
+
+composite(:resolution) do |c|
+  c.field :width, :uint16
+  c.field :height, :uint16
+end
+
+composite(:position) do |c|
+  c.field :x, :uint16
+  c.field :y, :uint16
+end
+
+composite(:mouse_sample) do |c|
+  c.field :cursor_type, :cursor_type
+  c.field :resolution, :resolution
+  c.field :position, :position
+end
+
+group(:mouse_request) do |c|
+  c.dataless :sample_mouse
+end
+
+group(:mouse_response) do |c|
+  c.field :sample_mouse, :mouse_sample
+  c.dataless :error, :error_information
+end
+
+variable_array(:error_information) do |c|
+  c.size_type :uint8
+  c.array_type :uint8
+  c.array_size 255
+end
+
