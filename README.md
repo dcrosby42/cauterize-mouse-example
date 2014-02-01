@@ -156,4 +156,39 @@ You should see binary output indicating you serialized `00 00 04 00 04 00 03 F4 
 
 ### Write a Ruby program to read the cauterized data
 
-TODO
+Make sure the `ruby_mouse_comm/` dir is in Ruby's `$LOAD_PATH`, and you can require your Ruby library for handling `mouse_comm` messages:
+
+	require 'mouse_comm'
+	
+	packed_data = File.read("mouse_message.dat")
+	mouse_message = MouseMessage.unpack(packed_data)
+
+Calling `#to_ruby` on a Cauterize structure will give its Ruby-ified equivalent:
+
+    {
+         :tag => :MOUSE_UPDATE,
+        :data => {
+            :cursor_type => :IBEAM,
+             :resolution => {
+                :width => 1024,
+                :height => 768
+            },
+               :position => {
+                :x => 500,
+                :y => 500
+            }
+        }
+    }
+
+### Sample program: `read_packet.rb`
+
+You can view run the `read_packet.rb` program in this repository.
+
+	ruby read_packet.rb
+	
+See output:
+
+	Read packed data from 'mouse_message.dat': "\x00\x00\x04\x00\x04\x00\x03\xF4\x01\xF4\x01"
+	Unpacked message of class: MouseMessage
+	mouse_message.to_ruby.inspect: {:tag=>:MOUSE_UPDATE, :data=>{:cursor_type=>:IBEAM, :resolution=>{:width=>1024, :height=>768}, :position=>{:x=>500, :y=>500}}}
+
