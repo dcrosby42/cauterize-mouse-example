@@ -2,14 +2,14 @@
 
 #include <mouse_comm.h>
 
-uint8_t packet_buffer[MAX_ENCODED_LENGTH_mouse_packet];
+uint8_t packet_buffer[MAX_ENCODED_LENGTH_mouse_message];
 
 int main(int argc, char * argv[]) {
 
   struct Cauterize c;
 
-  struct mouse_packet mouse_packet = {
-    .tag = GROUP_MOUSE_PACKET_TYPE_MOUSE_UPDATE,
+  struct mouse_message mouse_message = {
+    .tag = GROUP_MOUSE_MESSAGE_TYPE_MOUSE_UPDATE,
     .data = {
       .mouse_update = {
         .cursor_type = IBEAM,
@@ -32,7 +32,7 @@ int main(int argc, char * argv[]) {
       packet_buffer,
       sizeof(packet_buffer));
 
-  err = Pack_mouse_packet(&c, &mouse_packet);
+  err = Pack_mouse_message(&c, &mouse_message);
 
   for(size_t i = 0; i < c.used; i++) {
     printf("%02X ", packet_buffer[i]);
